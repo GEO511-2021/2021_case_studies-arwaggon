@@ -13,3 +13,4 @@ hist(iris$Petal.Length)
 ?hist
 hist(iris$Petal.Length, main="Histogram of Petal Length", col="blue", border="black",
      xlab="Petal Length data")
+#Case Study 1
