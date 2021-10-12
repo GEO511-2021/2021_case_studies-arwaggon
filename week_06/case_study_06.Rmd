@@ -55,3 +55,4 @@ hottest_country = country_temp %>%
 
 hottest_country
 
+#Case Study 6

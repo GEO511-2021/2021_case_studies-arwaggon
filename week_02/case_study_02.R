@@ -24,3 +24,4 @@ ggplot(temp, aes(x=YEAR, y=JJA)) + geom_line() + geom_smooth() +
 #Save the data
 ggsave("Case_Study_2.png")
 
+#Case Study 2
