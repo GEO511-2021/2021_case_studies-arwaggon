@@ -34,3 +34,5 @@ farthest_airport <- flights%>%
   select(name)%>%
   as.character()
 ```
+
+#Case Study 4
