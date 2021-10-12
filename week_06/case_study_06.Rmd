@@ -4,4 +4,54 @@ author: Your Name
 date: August 1, 2020
 output: github_document
 ---
- 
+#Load the libraries
+library(raster)
+library(sp)
+library(spData)
+library(tidyverse)
+library(sf)
+library(dplyr)
+
+#Load in the world data
+data(world)  #load 'world' data from spData package
+
+#Remove Antarctica
+antarctica <- filter(world, subregion != "Antarctica")
+world$subregion
+
+as(world, "Spatial")
+
+#Prepping Climate data
+tmax_monthly <- getData(name = "worldclim", var="tmax", res=10)
+tmax_monthly
+plot(tmax_monthly)
+
+#Setting Gain
+gain(tmax_monthly) <- .1  
+plot(tmax_monthly)
+
+#Creating tmax_annual
+tmax_annual <- max(tmax_monthly) 
+names(tmax_annual) <- "tmax" 
+
+#Calculating maximum temperature
+country_temp <- raster::extract(tmax_annual, antarctica, fun=max, na.rm=T, small=T, sp=T)
+country_temp = st_as_sf(country_temp)
+
+
+#Plot the results
+ggplot(country_temp) + geom_sf(aes(fill = tmax)) + 
+scale_fill_viridis_c(name = "Annual\nMaximum\nTemperature (C)")+
+theme(legend.position = "bottom")
+
+#Create table
+library(dplyr)
+hottest_country = country_temp %>%
+  group_by(continent) %>%
+  top_n(tmax, n=1) %>%
+  select(name_long, continent, tmax) %>%
+  arrange(desc(tmax)) %>%
+  st_set_geometry(NULL)
+
+hottest_country
+
