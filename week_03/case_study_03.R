@@ -58,3 +58,5 @@ ggplot(gapminder_continent, aes(x = year, y = gdpPercapweighted, size = pop/1000
 
 #Save the plot
 ggsave("Plot2.png", width = 15, height = 5)
+
+#Case Study 3
