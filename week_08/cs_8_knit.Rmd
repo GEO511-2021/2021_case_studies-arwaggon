@@ -1,0 +1,41 @@
+---
+title: "Case_Study_8"
+author: "Amanda Waggoner"
+date: "10/26/2021"
+output: html_document
+---
+
+## R Markdown
+
+
+```{r} 
+#Load in libraries
+library(tidyverse)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+#Download the data and edit the columns
+data <- read_table(file = "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_mlo.txt", skip = 57, col_names = c("year", "mean", "unc"))
+
+#Create the plot
+ggplot(data, aes(year, mean))+
+  geom_line(color = "red")+
+  scale_y_continuous()+
+  ggtitle("Annual Mean Mauna Loa Carbon Dioxide Concentrations 1959-Present")+
+   ylab("Mauna Loa Annual Mean CO_2 (ppm)")+
+  xlab("Year")
+  
+#Add additional graph
+knitr::kable(filter(data, year == "1995"))
+
+
+#Embedding the table
+data %>% 
+  kable() #%>% 
+  #as_image(width = 10,file = "cs_eight.png")
+
+```
+
+#Case Study 8
+
