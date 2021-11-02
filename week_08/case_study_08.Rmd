@@ -1,7 +1,7 @@
 ---
 title: "Case Study 08"
 author: Amanda Waggoner
-date: August 1, 2020
+date: October 26, 2021
 output: github_document
 ---
 
@@ -21,4 +21,9 @@ ggplot(data, aes(year, mean)+
 #Add additional graph
 knitr::kable(filter(data, year == "1995"))
 
-#
+top_5 <- data %>%
+        arrange(desc(mean))%>%
+        top_n(mean, n=5)
+        
+
+# Case Study 8
