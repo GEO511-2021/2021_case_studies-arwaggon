@@ -299,9 +299,24 @@ ggplot(plot_data, aes(x = time, y = LST_data)) +
 #' # Part 2: Summarize weekly data to monthly climatologies
 #' 
 tmonth <- as.numeric(format(getZ(lst),"%m"))
-lst_month <- stackApply(tmonth)
+lst_month <- stackApply(tmonth, fun=mean)
 names(lst_month)=month.name
 
+#' Plot
+
+gplot(lst_month) +
+  geom_raster(aes(fill=value)) +
+  facet_wrap(~variable) +
+  coord_equal()+
+  theme(legend.position="right") +
+  scale_fill_gradient(color = "red")
+  
+  
+#' Calculate mean
+monthly_mean <- cellStats (lst_month,mean)
+
+#' Print
+monthly_mean
 
 
 
