@@ -1,7 +1,29 @@
 ---
 title: "Case Study 08"
-author: Your Name
-date: August 1, 2020
+author: Amanda Waggoner
+date: October 26, 2021
 output: github_document
 ---
- 
+
+#Load in libraries
+library(tidyverse)
+library(dplyr)
+
+
+#Download the data and edit the columns
+data <- read_table(file = "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_mlo.txt", skip = 57, col_names = c("year", "mean", "unc"))
+
+
+#Create the plot
+ggplot(data, aes(year, mean)+
+  geom_line()
+  
+#Add additional graph
+knitr::kable(filter(data, year == "1995"))
+
+top_5 <- data %>%
+        arrange(desc(mean))%>%
+        top_n(mean, n=5)
+        
+
+# Case Study 8

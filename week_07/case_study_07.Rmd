@@ -1,7 +1,22 @@
 ---
 title: "Case Study 07"
-author: Your Name
-date: August 1, 2020
+author: Amanda Waggoner
+date: October 19, 2021
 output: github_document
 ---
  
+# Load in libraries
+library(tidyverse)
+library(reprex)
+library(sf)
+
+library(spData)
+data(world)
+
+# Create the plot
+ggplot(world, aes(x=gdpPercap, color=continent, fill=continent))+
+   geom_density(alpha=0.5) +
+   theme(legend.position = "bottom")
+  
+# Reprex   
+reprex(venue = "gh")
